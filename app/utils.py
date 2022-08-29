@@ -6,8 +6,10 @@
 import logbook
 
 from app import pity
+from .decorator import SingletonDecorator
 
-
+# 注意这里
+@SingletonDecorator
 class Log(object):
     handler = None
 
