@@ -19,6 +19,7 @@ class Log(object):
         :param filename: 文件名称
         """
         self.handler = logbook.FileHandler(filename, encoding='utf-8')
+        logbook.set_datetime_format("local")  # 将日志时间设置为本地时间
         self.logger = logbook.Logger(name)
         self.handler.push_application()
 
