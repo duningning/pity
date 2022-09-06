@@ -8,6 +8,7 @@ from flask import Flask
 from app.controller.auth.user import auth
 from config import Config
 
+
 pity = Flask(__name__)
 
 
