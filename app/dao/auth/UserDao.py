@@ -45,11 +45,11 @@ class UserDao(object):
     def login(username, password):
         try:
             pwd = UserToken.add_salt(password)
-            #查询用户名/密码匹配且没有被删除的用户
+            # 查询用户名/密码匹配且没有被删除的用户
             user = User.query.filter_by(username=username, password=pwd, deleted_at=None).first()
             if user is None:
                 return None, "用户名或密码错误"
-            #更新用户的最后登录时间
+            # 更新用户的最后登录时间
             user.last_login_at = datetime.now()
             db.session.commit()
             return user, None

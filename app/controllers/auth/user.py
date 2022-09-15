@@ -40,7 +40,6 @@ def login():
     user, err = UserDao.login(username, password)
     if err is not None:
         return jsonify(dict(code=110, msg=err))
-
     user = ResponseFactory.model_to_dict(user, "password")
     token = UserToken.get_token(user)
     if err is not None:

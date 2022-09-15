@@ -5,6 +5,7 @@
 # IDE   : PyCharm
 from datetime import datetime
 
+
 class ResponseFactory(object):
 
     @staticmethod
@@ -12,7 +13,7 @@ class ResponseFactory(object):
         data = dict()
         for c in obj.__table__.columns:
             if c.name in ignore:
-                #如果字段忽略，则不进行转换
+                # 如果字段忽略, 则不进行转换
                 continue
             val = getattr(obj, c.name)
             if isinstance(val, datetime):
