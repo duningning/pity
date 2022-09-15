@@ -9,6 +9,8 @@ from datetime import timedelta, datetime
 import jwt
 from jwt.exceptions import ExpiredSignatureError
 
+
+
 EXPIRED_HOUR = 3
 
 
@@ -17,19 +19,20 @@ class UserToken(object):
     salt = 'pity'
 
     @staticmethod
-    def get_token(data):
+    def get_token(data):#用户信息压缩成一串字符串，并附带3小时的过期时间。
         new_data = dict({"exp": datetime.utcnow() + timedelta(hours=EXPIRED_HOUR)}, **data)
         return jwt.encode(new_data, key=UserToken.key).decode()
 
     @staticmethod
-    def parse_token(token):
+    def parse_token(token):#解析token为之前的用户信息
         try:
             return jwt.decode(token, key=UserToken.key)
         except ExpiredSignatureError:
             raise Exception("token已过期, 请重新登录")
 
     @staticmethod
-    def add_salt(password):
+    def add_salt(password):#用md5码去存储用户密码
         m = hashlib.md5()
-        m.update(password + UserToken.salt)
+        bt = f"{password}{UserToken.salt}".encode("utf-8")
+        m.update(bt)
         return m.hexdigest()

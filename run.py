@@ -6,14 +6,21 @@
 from datetime import datetime
 
 from app import pity
-from app.utils import Log
-from app import dao
+from app.utils.logger import Log
+from app.controllers.auth.user import auth
+
+from app import dao #使得建表语句db.create_all()生效
+#注册蓝图
+pity.register_blueprint(auth)
+
 
 @pity.route('/')
 def hello_world():
     log = Log('Hello world专用')
     log.info('有人访问你的网站了')
-    return 'Hello World!'
+    now = datetime.now().strftime("%Y-%M-%d %H:%M:%S")
+    print(now)
+    return now
 
 
 if __name__ == "__main__":

@@ -7,8 +7,8 @@
 import os
 
 class Config(object):
-    ROOT = os.path.dirname(os.path.abspath(__file__))
-    LOG_NAME = os.path.join(ROOT, 'logs', 'pity.log')
+    ROOT = os.path.dirname(os.path.abspath(__file__)) # 根目录配置
+    LOG_NAME = os.path.join(ROOT, 'logs', 'pity.log') # log文件路径
     # Flask jsonify编码问题
     JSON_AS_ASCII = False
 
